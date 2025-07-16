@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router";
+import AuthContext from "../../context/AuthContext/AuthContext";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "light";
   });
@@ -18,6 +21,16 @@ const Navbar = () => {
     } else {
       setTheme("light");
     }
+  };
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then((result) => {
+        console.log("successfully sign out");
+      })
+      .catch((error) => {
+        console.log("Failed to sign out.");
+      });
   };
 
   const menu = (
@@ -67,7 +80,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -94,13 +107,30 @@ const Navbar = () => {
               {menu}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-display">JobSy</a>
+          <Link
+            to={"/"}
+            className="flex items-center gap-2 text-xl font-display"
+          >
+            <img className="w-10" src={logo} alt="" />
+            <p className="text-[#6CD7E3] font-extrabold text-2xl">JobSy</p>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menu}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {/* <a className="btn">Button</a> */}
+          {user ? (
+            <>
+              <button onClick={handleSignOut} className="btn">
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <div>
+              <Link to={"/signIn"}>Sing In</Link>
+            </div>
+          )}
         </div>
         <label className="flex cursor-pointer ml-4">
           <p className="mr-1">

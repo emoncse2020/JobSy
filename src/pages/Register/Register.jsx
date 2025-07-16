@@ -1,9 +1,11 @@
 import Lottie from "lottie-react";
 import registerLottie from "../../assets/Manusinglaptop.json";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
 
   const handleRegister = (formData) => {
     const email = formData.get("email");
@@ -23,13 +25,21 @@ const Register = () => {
       setError("Two password filled didn't match");
       return;
     }
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
-    <div>
+    <div className="md:min-h-[calc(100vh-300px)] lg:min-h-[calc(100vh-338px)] flex justify-center items-center ">
       <section className="bg-white dark:bg-gray-900 font-sans">
         {" "}
         {/* Added font-sans for Inter font */}
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center ">
           {/* Left side image section */}
           <div
             className="hidden bg-cover lg:block lg:w-2/5 rounded-l-lg" // Added rounded-l-lg for rounded corners
@@ -93,7 +103,7 @@ const Register = () => {
 
                 {/* Sign Up button */}
                 {error && <p className="text-label text-red-500 ">{error}</p>}
-                <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 md:col-span-2">
+                <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
                   <span>Sign Up</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

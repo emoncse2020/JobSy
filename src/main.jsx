@@ -6,9 +6,12 @@ import { RouterProvider } from "react-router";
 import router from "./router/router.jsx";
 
 import { Toaster } from "react-hot-toast";
+import FirebaseProvider from "./context/AuthContext/FirebaseProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <FirebaseProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </FirebaseProvider>
   </StrictMode>
 );
