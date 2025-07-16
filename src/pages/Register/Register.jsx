@@ -2,6 +2,9 @@ import Lottie from "lottie-react";
 import registerLottie from "../../assets/Manusinglaptop.json";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import GoogleSingIn from "../shared/SocialLogin/GoogleSingIn";
+import FaceBookSignIn from "../shared/SocialLogin/FaceBookSignIn";
+import SocialDivider from "../shared/SocialLogin/SocialDivider";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -36,7 +39,7 @@ const Register = () => {
   };
   return (
     <div className="md:min-h-[calc(100vh-300px)] lg:min-h-[calc(100vh-338px)] flex justify-center items-center ">
-      <section className="bg-white dark:bg-gray-900 font-sans">
+      <section className=" dark:bg-gray-900 font-sans">
         {" "}
         {/* Added font-sans for Inter font */}
         <div className="flex justify-center items-center ">
@@ -54,14 +57,13 @@ const Register = () => {
           {/* Right side form section */}
           <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div className="w-full">
-              <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
+              <h1 className="text-2xl font-semibold text-center tracking-wider text-gray-800 capitalize dark:text-white">
                 Get your free account now.
               </h1>
 
-              <p className="mt-4 text-gray-500 dark:text-gray-400">
-                Let’s get you all set up so you can verify your personal account
-                and begin setting up your profile.
-              </p>
+              <GoogleSingIn></GoogleSingIn>
+              <FaceBookSignIn></FaceBookSignIn>
+              <SocialDivider></SocialDivider>
 
               {/* Sign-up form */}
               <form action={handleRegister} className="w-full space-y-3 ">
