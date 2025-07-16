@@ -5,9 +5,13 @@ import AuthContext from "../../context/AuthContext/AuthContext";
 import GoogleSingIn from "../shared/SocialLogin/GoogleSingIn";
 import FaceBookSignIn from "../shared/SocialLogin/FaceBookSignIn";
 import SocialDivider from "../shared/SocialLogin/SocialDivider";
+import { useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
   const { signInUser, signOutUser } = useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state || "/";
+  const navigate = useNavigate();
   const handleSignIn = (formData) => {
     const email = formData.get("email");
     const password = formData.get("password");
@@ -16,6 +20,7 @@ const SignIn = () => {
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate(from);
       })
       .catch((error) => {
         console.log(error.message);
