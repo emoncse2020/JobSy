@@ -68,12 +68,12 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/"}
+          to={"/myApplications"}
           className={({ isActive }) => {
             return isActive ? "bg-green-400 mx-2" : "mx-2";
           }}
         >
-          Home 2
+          My Application
         </NavLink>
       </li>
     </>

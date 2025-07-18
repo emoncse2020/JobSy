@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import JobDetails from "../pages/JobDetails/JobDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import JobApply from "../pages/JobApply/JobApply";
+import MyApplications from "../pages/MyApplications/MyApplications";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <JobApply></JobApply>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/myApplications",
+        element: (
+          <ProtectedRoute>
+            <MyApplications></MyApplications>
           </ProtectedRoute>
         ),
       },
