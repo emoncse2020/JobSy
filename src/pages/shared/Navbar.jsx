@@ -68,6 +68,16 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to={"/myPostedJobs"}
+          className={({ isActive }) => {
+            return isActive ? "bg-green-400 mx-2" : "mx-2";
+          }}
+        >
+          My Posted Jobs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to={"/myApplications"}
           className={({ isActive }) => {
             return isActive ? "bg-green-400 mx-2" : "mx-2";

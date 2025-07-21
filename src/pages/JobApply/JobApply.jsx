@@ -22,13 +22,16 @@ const JobApply = () => {
       applicant_email: user?.email,
     };
     try {
-      const res = await fetch("http://localhost:5000/job-applications", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(applicationData),
-      });
+      const res = await fetch(
+        "https://jobsy-server.vercel.app/job-applications",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(applicationData),
+        }
+      );
       if (!res.ok) throw new Error("Network response was not ok");
 
       const result = await res.json();

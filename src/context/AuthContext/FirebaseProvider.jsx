@@ -10,6 +10,7 @@ import {
   signOut,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
+import axios from "axios";
 
 const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -49,12 +50,36 @@ const FirebaseProvider = ({ children }) => {
   //   sign Out user
   const signOutUser = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth)
+      .then(() => {
+        return axios.post(
+          "https://jobsy-server.vercel.app/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+      })
+      .then((res) => {
+        console.log("logout successfull", res.data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+        axios
+          .post("https://jobsy-server.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
+          .then((result) => {
+            console.log("login token", result.data);
+            setLoading(false);
+          });
+      }
       setLoading(false);
     });
 

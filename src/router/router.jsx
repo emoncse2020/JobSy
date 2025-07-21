@@ -7,6 +7,9 @@ import JobDetails from "../pages/JobDetails/JobDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import JobApply from "../pages/JobApply/JobApply";
 import MyApplications from "../pages/MyApplications/MyApplications";
+import PostJob from "../pages/PostJob/PostJob";
+import MyPostedJobs from "../pages/MyPostedJobs/MyPostedJobs";
+import ViewApplications from "../pages/ViewApplications/ViewApplications";
 
 const router = createBrowserRouter([
   {
@@ -19,17 +22,17 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/jobs/:id",
+        path: "jobs/:id",
         element: (
           <ProtectedRoute>
             <JobDetails></JobDetails>
           </ProtectedRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
+          fetch(`https://jobsy-server.vercel.app/jobs/${params.id}`),
       },
       {
-        path: "/jobApply/:id",
+        path: "jobApply/:id",
         element: (
           <ProtectedRoute>
             <JobApply></JobApply>
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myApplications",
+        path: "myApplications",
         element: (
           <ProtectedRoute>
             <MyApplications></MyApplications>
@@ -45,11 +48,39 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/signIn",
+        path: "postJob",
+        element: (
+          <ProtectedRoute>
+            <PostJob></PostJob>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "myPostedJobs",
+        element: (
+          <ProtectedRoute>
+            <MyPostedJobs></MyPostedJobs>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "viewApplication/:job_id",
+        element: (
+          <ProtectedRoute>
+            <ViewApplications></ViewApplications>
+          </ProtectedRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://jobsy-server.vercel.app/job-applications/jobs/${params.job_id}`
+          ),
+      },
+      {
+        path: "signIn",
         element: <SignIn></SignIn>,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register></Register>,
       },
     ],

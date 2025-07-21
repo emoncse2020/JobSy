@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
 import AuthContext from "../../../context/AuthContext/AuthContext";
+import { useLocation, useNavigate } from "react-router";
 
 const GoogleSingIn = () => {
   const { singInWithGoogle } = useContext(AuthContext);
+
+  // const location = useLocation();
+  // const from = location.state || "/";
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state || "/";
   const handleGoogleSignIn = () => {
     singInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        navigate(from);
       })
       .catch((error) => {
         console.log(error.message);
@@ -14,7 +23,7 @@ const GoogleSingIn = () => {
   };
   return (
     <div>
-      <p
+      <div
         onClick={handleGoogleSignIn}
         className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
       >
@@ -42,7 +51,7 @@ const GoogleSingIn = () => {
         <span className="w-5/6 px-4 py-3 font-bold text-center">
           Sign in with Google
         </span>
-      </p>
+      </div>
     </div>
   );
 };

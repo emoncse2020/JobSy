@@ -6,6 +6,7 @@ import GoogleSingIn from "../shared/SocialLogin/GoogleSingIn";
 import FaceBookSignIn from "../shared/SocialLogin/FaceBookSignIn";
 import SocialDivider from "../shared/SocialLogin/SocialDivider";
 import { useLocation, useNavigate } from "react-router";
+import axios from "axios";
 
 const SignIn = () => {
   const { signInUser, signOutUser } = useContext(AuthContext);
@@ -21,6 +22,11 @@ const SignIn = () => {
       .then((result) => {
         console.log(result.user);
         navigate(from);
+        // const user = { email: result.user.email };
+
+        // axios
+        //   .post("https://jobsy-server.vercel.app/jwt", user, { withCredentials: true })
+        //   .then((res) => console.log(res.data));
       })
       .catch((error) => {
         console.log(error.message);

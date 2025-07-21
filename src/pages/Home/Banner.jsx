@@ -2,6 +2,7 @@ import { anticipate } from "motion/react";
 import { motion } from "motion/react";
 import team1 from "../../assets/group1.jpg";
 import team2 from "../../assets/group2.jpg";
+import { Link } from "react-router";
 
 const Banner = () => {
   const floatVariants = {
@@ -69,11 +70,14 @@ const Banner = () => {
                 <span className="relative">Brows Jobs</span>
               </a>
 
-              <a className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group">
+              <Link
+                to={"/postJob"}
+                className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group"
+              >
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
                 <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
                 <span className="relative">Post a Job</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="relative w-full py-20 flex justify-center items-center">
